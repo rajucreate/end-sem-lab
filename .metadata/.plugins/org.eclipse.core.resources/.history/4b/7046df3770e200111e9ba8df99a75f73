@@ -1,0 +1,11 @@
+package com.example.demo;
+
+
+
+public class User {
+	
+	Long userId;
+	String username;
+	String role;
+	
+}

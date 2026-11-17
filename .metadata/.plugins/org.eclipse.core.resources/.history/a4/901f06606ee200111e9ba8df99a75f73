@@ -1,0 +1,33 @@
+import org.springframework.web.bind.annotation.*;
+
+
+
+@RestController
+@RequestMapping("/admin")
+public class UserController {
+
+    private final JwtUtil jwtUtil;
+
+    public UserController(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
+
+    // Generate ADMIN token
+    @GetMapping("/generate")
+    public String generateToken() {
+        return jwtUtil.generateToken("Ravi", "ADMIN");
+    }
+
+    // Validate ADMIN token
+    @GetMapping("/validate")
+    public String validateToken(@RequestParam String token) {
+
+        if (!jwtUtil.validateToken(token))
+            return "Invalid Token";
+
+        if (!"ADMIN".equals(jwtUtil.extractRole(token)))
+            return "Access Denied: Admin Only";
+
+        return "Welcome Admin!";
+    }
+}

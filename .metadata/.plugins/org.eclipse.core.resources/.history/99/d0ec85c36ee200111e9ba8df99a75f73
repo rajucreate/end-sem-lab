@@ -1,0 +1,12 @@
+package com.example.demo;
+
+import jakarta.persistence.Id;
+
+public class User {
+	
+	@Id
+	Long userId;
+	String username;
+	String role;
+	
+}
